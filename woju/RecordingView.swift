@@ -24,7 +24,9 @@ struct RecordingView: View {
         }
         .onAppear {
             AudioManager.shared.configureAudioSession()
-            AudioManager.shared.setMaxVolume()
+//            AudioManager.shared.setMaxVolume()
+            
+            A()
 
             let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             audioFileURL = documentPath.appendingPathComponent("audioRecording.m4a")
@@ -57,6 +59,12 @@ struct RecordingView: View {
                     break
                 }
             }
+    }
+    
+    func A() {
+        Task {
+            await AudioManager.shared.setSoundVolumeAccordingToFocusFilter()
+        }
     }
 
 
