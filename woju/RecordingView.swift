@@ -9,7 +9,6 @@ import AVFoundation
 import SwiftUI
 
 struct RecordingView: View {
-    @State private var isRecording = false
     @State private var audioRecorder: AVAudioRecorder?
     @State private var audioPlayer: AVAudioPlayer?
     @State private var audioFileURL: URL?
@@ -24,17 +23,11 @@ struct RecordingView: View {
             }.simultaneousGesture(continuousPress)
         }
         .onAppear {
-            do {
-                try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default, options: [])
-                try AVAudioSession.sharedInstance().overrideOutputAudioPort(.speaker)
-                try AVAudioSession.sharedInstance().setActive(true)
+            AudioManager.shared.configureAudioSession()
+            AudioManager.shared.setMaxVolume()
 
-                let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-                audioFileURL = documentPath.appendingPathComponent("audioRecording.m4a")
-
-            } catch {
-                print("Error setting up audio session: \(error.localizedDescription)")
-            }
+            let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            audioFileURL = documentPath.appendingPathComponent("audioRecording.m4a")
         }
     }
 
@@ -78,7 +71,6 @@ struct RecordingView: View {
 
             audioRecorder = try AVAudioRecorder(url: audioFileURL!, settings: settings)
             audioRecorder?.record()
-            isRecording = true
 
         } catch {
             print("Error setting up audio recording: \(error.localizedDescription)")
@@ -87,13 +79,16 @@ struct RecordingView: View {
 
     func stopRecording() {
         audioRecorder?.stop()
-        isRecording = false
     }
 
     func startPlayback() {
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: audioFileURL!)
             audioPlayer?.volume = 1.0 // Adjust volume from 0.0 to 1.0
+            
+            try AVAudioSession.sharedInstance().setMode(.default)
+
+            audioPlayer?.prepareToPlay()
             audioPlayer?.play()
 
         } catch {

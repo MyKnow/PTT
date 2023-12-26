@@ -6,6 +6,7 @@
 //
 
 import AVFoundation
+import MediaPlayer
 
 class AudioManager {
     static let shared = AudioManager()
@@ -14,15 +15,27 @@ class AudioManager {
 
     func configureAudioSession() {
         do {
-            let audioSession = AVAudioSession.sharedInstance()
-            try audioSession.setCategory(.playAndRecord, mode: .default, options: [])
-
-            // 메인 스피커로 오디오 출력 설정
-            try audioSession.overrideOutputAudioPort(AVAudioSession.PortOverride.none)
-            try audioSession.setActive(true)
+            try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default, options: [.mixWithOthers, .duckOthers, .defaultToSpeaker])
+            try AVAudioSession.sharedInstance().overrideOutputAudioPort(.speaker)
+            try AVAudioSession.sharedInstance().setActive(true)
 
         } catch {
             print("Error configuring audio session: \(error.localizedDescription)")
+        }
+    }
+
+    func setMaxVolume() {
+        MPVolumeView.setVolume(1.0)
+    }
+}
+
+extension MPVolumeView {
+    static func setVolume(_ volume: Float) -> Void {
+        let volumeView = MPVolumeView()
+        let slider = volumeView.subviews.first(where: { $0 is UISlider }) as? UISlider
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.01) {
+            slider?.value = volume
         }
     }
 }
