@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6D1AAA882B3A9F91004CE11D /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1AAA872B3A9F91004CE11D /* AudioManager.swift */; };
 		6D1AAA8A2B3AB432004CE11D /* FocusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1AAA892B3AB432004CE11D /* FocusManager.swift */; };
+		6D1AAA8C2B3AE61C004CE11D /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1AAA8B2B3AE61C004CE11D /* HapticManager.swift */; };
 		6D8861E72B3A93970002ED26 /* wojuApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8861E62B3A93970002ED26 /* wojuApp.swift */; };
 		6D8861E92B3A93970002ED26 /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8861E82B3A93970002ED26 /* RecordingView.swift */; };
 		6D8861EB2B3A93980002ED26 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D8861EA2B3A93980002ED26 /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 /* Begin PBXFileReference section */
 		6D1AAA872B3A9F91004CE11D /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		6D1AAA892B3AB432004CE11D /* FocusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusManager.swift; sourceTree = "<group>"; };
+		6D1AAA8B2B3AE61C004CE11D /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		6D8861E32B3A93970002ED26 /* woju.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = woju.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D8861E62B3A93970002ED26 /* wojuApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wojuApp.swift; sourceTree = "<group>"; };
 		6D8861E82B3A93970002ED26 /* RecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingView.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				6D8861E62B3A93970002ED26 /* wojuApp.swift */,
 				6D1AAA872B3A9F91004CE11D /* AudioManager.swift */,
 				6D1AAA892B3AB432004CE11D /* FocusManager.swift */,
+				6D1AAA8B2B3AE61C004CE11D /* HapticManager.swift */,
 				6D8861E82B3A93970002ED26 /* RecordingView.swift */,
 				6D8861EA2B3A93980002ED26 /* Assets.xcassets */,
 				6D8861EC2B3A93980002ED26 /* woju.entitlements */,
@@ -146,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D1AAA8A2B3AB432004CE11D /* FocusManager.swift in Sources */,
+				6D1AAA8C2B3AE61C004CE11D /* HapticManager.swift in Sources */,
 				6D1AAA882B3A9F91004CE11D /* AudioManager.swift in Sources */,
 				6D8861E92B3A93970002ED26 /* RecordingView.swift in Sources */,
 				6D8861E72B3A93970002ED26 /* wojuApp.swift in Sources */,

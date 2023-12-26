@@ -16,16 +16,21 @@ struct RecordingView: View {
 
     var body: some View {
         VStack {
-            Image(systemName: isDetectingContinuousPress ? "globe" : "pause.fill")
             Button {
+                // 버튼이 눌렸을 때 수행할 작업
             } label: {
-                Text("Recording")
+                Image(systemName: isDetectingContinuousPress ? "pause.fill" : "play.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: min(UIScreen.main.bounds.width / 3, UIScreen.main.bounds.height / 3))
+                    .padding(50)
+                    .background(Circle().foregroundColor(.blue))
+                    .foregroundColor(.white)
             }.simultaneousGesture(continuousPress)
         }
         .onAppear {
             AudioManager.shared.configureAudioSession()
-//            AudioManager.shared.setMaxVolume()
-            
+
             A()
 
             let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -42,6 +47,7 @@ struct RecordingView: View {
                     gestureState = true
                     print("updating: Second")
                     DispatchQueue.main.async {
+                        HapticManager.shared.vibrate()
                         startRecording()
                     }
                 default:
@@ -77,6 +83,7 @@ struct RecordingView: View {
                 AVEncoderAudioQualityKey: AVAudioQuality.max.rawValue
             ]
 
+            AudioManager.shared.getCurrentVolume()
             audioRecorder = try AVAudioRecorder(url: audioFileURL!, settings: settings)
             audioRecorder?.record()
 

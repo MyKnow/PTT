@@ -54,6 +54,16 @@ class AudioManager {
             print("Error setting sound volume according to focus filter: \(error.localizedDescription)")
         }
     }
+
+    func getCurrentVolume() {
+        do {
+            try AVAudioSession.sharedInstance().setActive(true)
+            let currentVolume = AVAudioSession.sharedInstance().outputVolume
+            print(currentVolume)
+        } catch {
+            print("Error getting current volume: \(error.localizedDescription)")
+        }
+    }
 }
 
 extension MPVolumeView {
