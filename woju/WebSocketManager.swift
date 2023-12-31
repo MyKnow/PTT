@@ -61,9 +61,6 @@ class WebSocketManager: NSObject {
         }
     }
 
-
-
-
     func sendData(data: Data) {
         // 클라이언트에서 음성 파일을 서버로 전송
         self.socket.emit("send-audio", data)

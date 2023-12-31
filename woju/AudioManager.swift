@@ -23,9 +23,8 @@ class AudioManager {
     // 오디오 세션 설정
     func configureAudioSession() {
         do {
-            try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default, options: [.mixWithOthers, .duckOthers, .defaultToSpeaker])
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers, .duckOthers, .defaultToSpeaker, .allowAirPlay])
             try AVAudioSession.sharedInstance().overrideOutputAudioPort(.speaker)
-            try AVAudioSession.sharedInstance().setActive(true)
             
         } catch {
             print("오디오 세션 구성 오류: \(error.localizedDescription)")
