@@ -5,17 +5,19 @@
 //  Created by 정민호 on 12/26/23.
 //
 
-import AVFoundation
 import SwiftUI
+import Foundation
 
 struct RecordingView: View {
-    @State private var audioRecorder: AVAudioRecorder?
-    @State private var audioPlayer: AVAudioPlayer?
-    @State private var audioFileURL: URL?
+    // 연속적인 제스처 상태를 추적하기 위한 속성
     @GestureState private var isDetectingContinuousPress = false
+    
+    // WebSocketManager의 인스턴스를 저장하는 속성
+    @State private var socket = WebSocketManager.shared
 
     var body: some View {
         VStack {
+            // 녹음 및 재생을 수행하는 버튼
             Button {
                 // 버튼이 눌렸을 때 수행할 작업
             } label: {
@@ -27,87 +29,65 @@ struct RecordingView: View {
                     .background(Circle().foregroundColor(.blue))
                     .foregroundColor(.white)
             }.simultaneousGesture(continuousPress)
+
+            // 서버에서 받은 오디오 파일을 재생하는 버튼
+            Button {
+                playtoServer()
+            } label: {
+                Image(systemName: "play.fill")
+            }
         }
         .onAppear {
+            // AudioManager 초기화 및 오디오 세션 설정
             AudioManager.shared.configureAudioSession()
 
-            A()
-
-            let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            audioFileURL = documentPath.appendingPathComponent("audioRecording.m4a")
         }
     }
 
+    // 연속된 프레스를 감지하기 위한 제스처
     var continuousPress: some Gesture {
         LongPressGesture(minimumDuration: 0.1)
             .sequenced(before: DragGesture(minimumDistance: 0, coordinateSpace: .local))
-            .updating($isDetectingContinuousPress) { value, gestureState, _ in
-                switch value {
-                case .second(true, nil):
-                    gestureState = true
-                    print("updating: Second")
-                    DispatchQueue.main.async {
-                        HapticManager.shared.vibrate()
-                        startRecording()
-                    }
-                default:
-                    break
+            .updating($isDetectingContinuousPress) { value, state, _ in
+                if case .second(true, nil) = value {
+                    // 두 번째 단계: 연속된 프레스의 두 번째 단계
+                    state = true
+                    var audioFileURL: URL?
+                    audioFileURL = FileManager.fileURLInDocumentDirectory(fileName: "audioRecording.m4a")
+                    
+                    // 추가: audioFileURL이 nil이 아닐 때만 녹음 시작
+                   if let audioURL = audioFileURL {
+                       print("Record : ", audioURL)
+                       AudioManager.shared.startRecording(to: audioURL)
+                   } else {
+                       print("Error: audioFileURL is nil.")
+                   }
                 }
             }.onEnded { value in
-                switch value {
-                case .second(_, _):
-                    print("onended: Second")
-                    DispatchQueue.main.async {
-                        stopRecording()
-                        startPlayback()
+                if case .second(_, _) = value {
+                    var audioFileURL: URL?
+                    audioFileURL = FileManager.fileURLInDocumentDirectory(fileName: "audioRecording.m4a")
+                    // 연속된 프레스의 끝
+                    if let url = audioFileURL {
+                        print("play : ", url)
+                        AudioManager.shared.stopRecording()
+                        // AudioManager.shared.startPlayback(from: url)
+                        socket.sendAudioFile(fileURL: url)
+                    } else {
+                        print("audioFileURL is nil")
                     }
-                default:
-                    break
                 }
             }
     }
-    
-    func A() {
-        Task {
-            await AudioManager.shared.setSoundVolumeAccordingToFocusFilter()
-        }
-    }
 
-
-    func startRecording() {
-        do {
-            let settings: [String: Any] = [
-                AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-                AVSampleRateKey: 44100.0,
-                AVNumberOfChannelsKey: 2,
-                AVEncoderAudioQualityKey: AVAudioQuality.max.rawValue
-            ]
-
-            AudioManager.shared.getCurrentVolume()
-            audioRecorder = try AVAudioRecorder(url: audioFileURL!, settings: settings)
-            audioRecorder?.record()
-
-        } catch {
-            print("Error setting up audio recording: \(error.localizedDescription)")
-        }
-    }
-
-    func stopRecording() {
-        audioRecorder?.stop()
-    }
-
-    func startPlayback() {
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: audioFileURL!)
-            audioPlayer?.volume = 1.0 // Adjust volume from 0.0 to 1.0
-            
-            try AVAudioSession.sharedInstance().setMode(.default)
-
-            audioPlayer?.prepareToPlay()
-            audioPlayer?.play()
-
-        } catch {
-            print("Error setting up audio playback: \(error.localizedDescription)")
+    // 서버에서 받은 오디오를 재생하는 함수
+    func playtoServer() {
+        var audioFileURL: URL?
+        audioFileURL = FileManager.fileURLInDocumentDirectory(fileName: "audioRecording.m4a")
+        if let url = audioFileURL {
+            AudioManager.shared.startPlayback(from: url)
+        } else {
+            print("audioFileURL is nil")
         }
     }
 }

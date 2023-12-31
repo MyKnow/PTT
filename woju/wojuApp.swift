@@ -9,9 +9,9 @@ import SwiftUI
 
 @main
 struct wojuApp: App {
-//    init() {
+    init() {
 //        AudioManager.shared.configureAudioSession()
-//    }
+    }
     
     var body: some Scene {
         WindowGroup {
