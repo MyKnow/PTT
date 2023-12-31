@@ -20,17 +20,6 @@ class AudioManager {
         self.volumeView = MPVolumeView()
     }
     
-    // 오디오 세션 설정
-    func configureAudioSession() {
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers, .duckOthers, .defaultToSpeaker, .allowAirPlay])
-            try AVAudioSession.sharedInstance().overrideOutputAudioPort(.speaker)
-            
-        } catch {
-            print("오디오 세션 구성 오류: \(error.localizedDescription)")
-        }
-    }
-    
     // 최대 볼륨 설정
     func setMaxVolume() {
         MPVolumeView.setVolume(1.0, using: volumeView)
@@ -73,8 +62,30 @@ class AudioManager {
         }
     }
     
+    // 오디오 세션 설정
+    func configureAudioSession(isRecording: Bool) {
+        do {
+            var category: AVAudioSession.Category
+            var option: AVAudioSession.CategoryOptions
+            if isRecording {
+                category = .playAndRecord
+                option = [.duckOthers, .defaultToSpeaker]
+            } else {
+                category = .playback
+                option = [.duckOthers]
+            }
+
+            try AVAudioSession.sharedInstance().setCategory(category, mode: .default, options: option)
+
+        } catch {
+            print("오디오 세션 구성 오류: \(error.localizedDescription)")
+        }
+    }
+
     // 녹음 시작
     func startRecording(to url: URL) {
+        configureAudioSession(isRecording: true)
+
         do {
             let settings: [String: Any] = [
                 AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
@@ -89,14 +100,15 @@ class AudioManager {
             print("오디오 녹음 설정 오류: \(error.localizedDescription)")
         }
     }
-
-    // 녹음 중지
+    
     func stopRecording() {
         audioRecorder?.stop()
     }
 
     // 재생 시작
     func startPlayback(from url: URL) {
+        configureAudioSession(isRecording: false)
+
         do {
             print("audioPlayer URL : ", url)
             audioPlayer = try AVAudioPlayer(contentsOf: url)

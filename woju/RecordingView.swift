@@ -39,7 +39,7 @@ struct RecordingView: View {
         }
         .onAppear {
             // AudioManager 초기화 및 오디오 세션 설정
-            AudioManager.shared.configureAudioSession()
+            AudioManager.shared.configureAudioSession(isRecording: false)
 
         }
     }
