@@ -18,8 +18,42 @@
 		6D8861E92B3A93970002ED26 /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8861E82B3A93970002ED26 /* RecordingView.swift */; };
 		6D8861EB2B3A93980002ED26 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D8861EA2B3A93980002ED26 /* Assets.xcassets */; };
 		6D8861EF2B3A93980002ED26 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D8861EE2B3A93980002ED26 /* Preview Assets.xcassets */; };
+		6DCE4CC02B455F7300C8410F /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DCE4CBF2B455F7300C8410F /* WidgetKit.framework */; };
+		6DCE4CC22B455F7300C8410F /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DCE4CC12B455F7300C8410F /* SwiftUI.framework */; };
+		6DCE4CC52B455F7300C8410F /* DynamicIslandWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCE4CC42B455F7300C8410F /* DynamicIslandWidgetBundle.swift */; };
+		6DCE4CC72B455F7300C8410F /* DynamicIslandWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCE4CC62B455F7300C8410F /* DynamicIslandWidgetLiveActivity.swift */; };
+		6DCE4CC92B455F7300C8410F /* DynamicIslandWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCE4CC82B455F7300C8410F /* DynamicIslandWidget.swift */; };
+		6DCE4CCB2B455F7300C8410F /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCE4CCA2B455F7300C8410F /* AppIntent.swift */; };
+		6DCE4CCD2B455F7400C8410F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DCE4CCC2B455F7400C8410F /* Assets.xcassets */; };
+		6DCE4CD12B455F7400C8410F /* DynamicIslandWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6DCE4CBD2B455F7300C8410F /* DynamicIslandWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6DCE4CD72B45612800C8410F /* DynamicIslandWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCE4CC62B455F7300C8410F /* DynamicIslandWidgetLiveActivity.swift */; };
 		6DEB73F52B41511A00150483 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DEB73F42B41511A00150483 /* FileManager.swift */; };
+		6DED543E2B45BDFF004D5A02 /* DIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DED543D2B45BDFF004D5A02 /* DIManager.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6DCE4CCF2B455F7400C8410F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D8861DB2B3A93970002ED26 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DCE4CBC2B455F7300C8410F;
+			remoteInfo = DynamicIslandWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6DCE4CD52B455F7400C8410F /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6DCE4CD12B455F7400C8410F /* DynamicIslandWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		6D1AAA872B3A9F91004CE11D /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
@@ -34,7 +68,17 @@
 		6D8861EA2B3A93980002ED26 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6D8861EC2B3A93980002ED26 /* woju.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = woju.entitlements; sourceTree = "<group>"; };
 		6D8861EE2B3A93980002ED26 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6DCE4CBD2B455F7300C8410F /* DynamicIslandWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DynamicIslandWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DCE4CBF2B455F7300C8410F /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		6DCE4CC12B455F7300C8410F /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		6DCE4CC42B455F7300C8410F /* DynamicIslandWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicIslandWidgetBundle.swift; sourceTree = "<group>"; };
+		6DCE4CC62B455F7300C8410F /* DynamicIslandWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicIslandWidgetLiveActivity.swift; sourceTree = "<group>"; };
+		6DCE4CC82B455F7300C8410F /* DynamicIslandWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicIslandWidget.swift; sourceTree = "<group>"; };
+		6DCE4CCA2B455F7300C8410F /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		6DCE4CCC2B455F7400C8410F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6DCE4CCE2B455F7400C8410F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6DEB73F42B41511A00150483 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		6DED543D2B45BDFF004D5A02 /* DIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,14 +91,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6DCE4CBA2B455F7300C8410F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DCE4CC22B455F7300C8410F /* SwiftUI.framework in Frameworks */,
+				6DCE4CC02B455F7300C8410F /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		6D8861DA2B3A93970002ED26 = {
 			isa = PBXGroup;
 			children = (
-				6D8861E52B3A93970002ED26 /* woju */,
 				6D8861E42B3A93970002ED26 /* Products */,
+				6DCE4CBE2B455F7300C8410F /* Frameworks */,
+				6DCE4CC32B455F7300C8410F /* DynamicIslandWidget */,
+				6DED543B2B45B68C004D5A02 /* Managers */,
+				6DED543C2B45B6AD004D5A02 /* Views */,
+				6D8861E52B3A93970002ED26 /* woju */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				6D8861E32B3A93970002ED26 /* woju.app */,
+				6DCE4CBD2B455F7300C8410F /* DynamicIslandWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -69,18 +127,11 @@
 		6D8861E52B3A93970002ED26 /* woju */ = {
 			isa = PBXGroup;
 			children = (
-				6D2C8D8F2B3D375000244F49 /* Info.plist */,
-				6D8861E62B3A93970002ED26 /* wojuApp.swift */,
-				6D1AAA872B3A9F91004CE11D /* AudioManager.swift */,
-				6D1AAA892B3AB432004CE11D /* FocusManager.swift */,
-				6DEB73F42B41511A00150483 /* FileManager.swift */,
-				6D1AAA8B2B3AE61C004CE11D /* HapticManager.swift */,
-				6D743BA12B3B2A34002B5868 /* ServerManager.swift */,
-				6D8861E82B3A93970002ED26 /* RecordingView.swift */,
-				6D2C8D902B3D9F4100244F49 /* WebSocketManager.swift */,
-				6D8861EA2B3A93980002ED26 /* Assets.xcassets */,
-				6D8861EC2B3A93980002ED26 /* woju.entitlements */,
 				6D8861ED2B3A93980002ED26 /* Preview Content */,
+				6D8861EA2B3A93980002ED26 /* Assets.xcassets */,
+				6D2C8D8F2B3D375000244F49 /* Info.plist */,
+				6D8861EC2B3A93980002ED26 /* woju.entitlements */,
+				6D8861E62B3A93970002ED26 /* wojuApp.swift */,
 			);
 			path = woju;
 			sourceTree = "<group>";
@@ -93,6 +144,50 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		6DCE4CBE2B455F7300C8410F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6DCE4CBF2B455F7300C8410F /* WidgetKit.framework */,
+				6DCE4CC12B455F7300C8410F /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6DCE4CC32B455F7300C8410F /* DynamicIslandWidget */ = {
+			isa = PBXGroup;
+			children = (
+				6DCE4CC42B455F7300C8410F /* DynamicIslandWidgetBundle.swift */,
+				6DCE4CC62B455F7300C8410F /* DynamicIslandWidgetLiveActivity.swift */,
+				6DCE4CC82B455F7300C8410F /* DynamicIslandWidget.swift */,
+				6DCE4CCA2B455F7300C8410F /* AppIntent.swift */,
+				6DCE4CCC2B455F7400C8410F /* Assets.xcassets */,
+				6DCE4CCE2B455F7400C8410F /* Info.plist */,
+			);
+			path = DynamicIslandWidget;
+			sourceTree = "<group>";
+		};
+		6DED543B2B45B68C004D5A02 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				6D1AAA872B3A9F91004CE11D /* AudioManager.swift */,
+				6DED543D2B45BDFF004D5A02 /* DIManager.swift */,
+				6D1AAA892B3AB432004CE11D /* FocusManager.swift */,
+				6DEB73F42B41511A00150483 /* FileManager.swift */,
+				6D1AAA8B2B3AE61C004CE11D /* HapticManager.swift */,
+				6D743BA12B3B2A34002B5868 /* ServerManager.swift */,
+				6D2C8D902B3D9F4100244F49 /* WebSocketManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		6DED543C2B45B6AD004D5A02 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6D8861E82B3A93970002ED26 /* RecordingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -103,10 +198,12 @@
 				6D8861DF2B3A93970002ED26 /* Sources */,
 				6D8861E02B3A93970002ED26 /* Frameworks */,
 				6D8861E12B3A93970002ED26 /* Resources */,
+				6DCE4CD52B455F7400C8410F /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				6DCE4CD02B455F7400C8410F /* PBXTargetDependency */,
 			);
 			name = woju;
 			packageProductDependencies = (
@@ -116,6 +213,23 @@
 			productName = woju;
 			productReference = 6D8861E32B3A93970002ED26 /* woju.app */;
 			productType = "com.apple.product-type.application";
+		};
+		6DCE4CBC2B455F7300C8410F /* DynamicIslandWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6DCE4CD22B455F7400C8410F /* Build configuration list for PBXNativeTarget "DynamicIslandWidgetExtension" */;
+			buildPhases = (
+				6DCE4CB92B455F7300C8410F /* Sources */,
+				6DCE4CBA2B455F7300C8410F /* Frameworks */,
+				6DCE4CBB2B455F7300C8410F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DynamicIslandWidgetExtension;
+			productName = DynamicIslandWidgetExtension;
+			productReference = 6DCE4CBD2B455F7300C8410F /* DynamicIslandWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -128,6 +242,9 @@
 				LastUpgradeCheck = 1510;
 				TargetAttributes = {
 					6D8861E22B3A93970002ED26 = {
+						CreatedOnToolsVersion = 15.1;
+					};
+					6DCE4CBC2B455F7300C8410F = {
 						CreatedOnToolsVersion = 15.1;
 					};
 				};
@@ -149,6 +266,7 @@
 			projectRoot = "";
 			targets = (
 				6D8861E22B3A93970002ED26 /* woju */,
+				6DCE4CBC2B455F7300C8410F /* DynamicIslandWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -163,6 +281,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6DCE4CBB2B455F7300C8410F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DCE4CCD2B455F7400C8410F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -174,14 +300,35 @@
 				6D1AAA8C2B3AE61C004CE11D /* HapticManager.swift in Sources */,
 				6D1AAA882B3A9F91004CE11D /* AudioManager.swift in Sources */,
 				6D8861E92B3A93970002ED26 /* RecordingView.swift in Sources */,
+				6DED543E2B45BDFF004D5A02 /* DIManager.swift in Sources */,
 				6D743BA22B3B2A34002B5868 /* ServerManager.swift in Sources */,
 				6D8861E72B3A93970002ED26 /* wojuApp.swift in Sources */,
+				6DCE4CD72B45612800C8410F /* DynamicIslandWidgetLiveActivity.swift in Sources */,
 				6D2C8D912B3D9F4100244F49 /* WebSocketManager.swift in Sources */,
 				6DEB73F52B41511A00150483 /* FileManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6DCE4CB92B455F7300C8410F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DCE4CC92B455F7300C8410F /* DynamicIslandWidget.swift in Sources */,
+				6DCE4CCB2B455F7300C8410F /* AppIntent.swift in Sources */,
+				6DCE4CC52B455F7300C8410F /* DynamicIslandWidgetBundle.swift in Sources */,
+				6DCE4CC72B455F7300C8410F /* DynamicIslandWidgetLiveActivity.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6DCE4CD02B455F7400C8410F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6DCE4CBC2B455F7300C8410F /* DynamicIslandWidgetExtension */;
+			targetProxy = 6DCE4CCF2B455F7400C8410F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		6D8861F02B3A93980002ED26 /* Debug */ = {
@@ -236,6 +383,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -293,6 +441,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -305,6 +454,7 @@
 		6D8861F32B3A93980002ED26 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = woju/woju.entitlements;
@@ -327,7 +477,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
@@ -346,6 +496,7 @@
 		6D8861F42B3A93980002ED26 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = woju/woju.entitlements;
@@ -368,7 +519,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
@@ -381,6 +532,63 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		6DCE4CD32B455F7400C8410F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 695C73WCLD;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DynamicIslandWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DynamicIslandWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.myknow.woju.DynamicIslandWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6DCE4CD42B455F7400C8410F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 695C73WCLD;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DynamicIslandWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DynamicIslandWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.myknow.woju.DynamicIslandWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -401,6 +609,15 @@
 			buildConfigurations = (
 				6D8861F32B3A93980002ED26 /* Debug */,
 				6D8861F42B3A93980002ED26 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6DCE4CD22B455F7400C8410F /* Build configuration list for PBXNativeTarget "DynamicIslandWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DCE4CD32B455F7400C8410F /* Debug */,
+				6DCE4CD42B455F7400C8410F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

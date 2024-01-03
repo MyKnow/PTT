@@ -7,10 +7,13 @@
 
 import SwiftUI
 import Foundation
+import ActivityKit
 
+@available(iOS 16.1, *)
 struct RecordingView: View {
     // 연속적인 제스처 상태를 추적하기 위한 속성
     @GestureState private var isDetectingContinuousPress = false
+    @StateObject var viewModel = DIManager()
     
     // WebSocketManager의 인스턴스를 저장하는 속성
     @State private var socket = WebSocketManager.shared
@@ -36,6 +39,19 @@ struct RecordingView: View {
             } label: {
                 Image(systemName: "play.fill")
             }
+            
+            Text("\(viewModel.num)")
+            Button {
+                viewModel.onLiveActivity()
+            } label: {
+                Text("라이브액티비티 on")
+            }
+            Button {
+                viewModel.offLiveActivity()
+            } label: {
+                Text("라이브액티비티 off")
+            }
+            
         }
         .onAppear {
             // AudioManager 초기화 및 오디오 세션 설정
@@ -89,5 +105,13 @@ struct RecordingView: View {
         } else {
             print("audioFileURL is nil")
         }
+    }
+}
+
+#Preview {
+    if #available(iOS 16.1, *) {
+        RecordingView()
+    } else {
+        Text("Not Support iOS version")
     }
 }

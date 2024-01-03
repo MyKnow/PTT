@@ -8,6 +8,7 @@
 import SwiftUI
 
 @main
+@available(iOS 16.1, *)
 struct wojuApp: App {
     init() {
 //        AudioManager.shared.configureAudioSession()
