@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "linknavigator",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/interactord/LinkNavigator.git",
+      "state" : {
+        "revision" : "4060cb3c0bb553e750778b0b78208e7ebb2f8b10",
+        "version" : "1.0.2"
+      }
+    },
+    {
       "identity" : "socket.io-client-swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/socketio/socket.io-client-swift",
@@ -16,6 +25,15 @@
       "state" : {
         "revision" : "ac6c0fc9da221873e01bd1a0d4818498a71eef33",
         "version" : "4.0.6"
+      }
+    },
+    {
+      "identity" : "urlencodedform",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/interactord/URLEncodedForm",
+      "state" : {
+        "revision" : "5f51aa13d41b26fc8833cd040df3a3101768bb64",
+        "version" : "1.0.8"
       }
     }
   ],

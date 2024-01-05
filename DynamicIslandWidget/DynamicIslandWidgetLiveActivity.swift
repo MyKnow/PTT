@@ -23,8 +23,8 @@ struct DynamicIslandWidgetAttributes: ActivityAttributes {
 struct DynamicIslandWidgetLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: DynamicIslandWidgetAttributes.self) { context in
-            // Lock screen/banner UI goes here
             
+            // 잠금 화면에 뜨는 알림창
             VStack(alignment: .leading) {
                 Text("잠금화면에 뜨는 Live Activity")
                 Text("이름: \(context.attributes.name)")
@@ -35,6 +35,7 @@ struct DynamicIslandWidgetLiveActivity: Widget {
             .activitySystemActionForegroundColor(Color.orange)
             
         } dynamicIsland: { context in
+            // DynamicIsland
             DynamicIsland {
                 // Expanded UI goes here.  Compose the expanded UI through
                 // various regions, like leading/trailing/center/bottom

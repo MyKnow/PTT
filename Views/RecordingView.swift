@@ -24,21 +24,18 @@ struct RecordingView: View {
             Button {
                 // 버튼이 눌렸을 때 수행할 작업
             } label: {
-                Image(systemName: isDetectingContinuousPress ? "pause.fill" : "play.fill")
+                Image(systemName: isDetectingContinuousPress ? "mic.slash.circle.fill" : "mic.circle.fill")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: min(UIScreen.main.bounds.width / 3, UIScreen.main.bounds.height / 3))
-                    .padding(50)
-                    .background(Circle().foregroundColor(.blue))
-                    .foregroundColor(.white)
+                    .frame(width: min(UIScreen.main.bounds.width / 2, UIScreen.main.bounds.height / 2))
             }.simultaneousGesture(continuousPress)
 
             // 서버에서 받은 오디오 파일을 재생하는 버튼
-            Button {
-                playtoServer()
-            } label: {
-                Image(systemName: "play.fill")
-            }
+//            Button {
+//                playtoServer()
+//            } label: {
+//                Image(systemName: "play.fill")
+//            }
             
             Text("\(viewModel.num)")
             Button {
@@ -51,7 +48,6 @@ struct RecordingView: View {
             } label: {
                 Text("라이브액티비티 off")
             }
-            
         }
         .onAppear {
             // AudioManager 초기화 및 오디오 세션 설정

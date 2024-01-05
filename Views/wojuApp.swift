@@ -16,7 +16,7 @@ struct wojuApp: App {
     
     var body: some Scene {
         WindowGroup {
-            RecordingView()
+            MainView()
         }
     }
 }
