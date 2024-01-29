@@ -17,7 +17,8 @@ final class DIManager: ObservableObject {
     func onLiveActivity() {
             // 앱이 live activity사용 가능한지여부
             guard ActivityAuthorizationInfo().areActivitiesEnabled else { return }
-            let attribute = DynamicIslandWidgetAttributes(name: "NS")
+        let attribute = DynamicIslandWidgetAttributes(name: WebSocketManager.shared.nowSessionName ?? "ERROR")
+        
             // stateful한 값
             let state = DynamicIslandWidgetAttributes.ContentState(value: 0)
             do {

@@ -16,38 +16,32 @@ struct RecordingView: View {
     @StateObject var viewModel = DIManager()
     
     // WebSocketManager의 인스턴스를 저장하는 속성
-    @State private var socket = WebSocketManager.shared
+    @ObservedObject var socket = WebSocketManager.shared
+    
+    @Binding var goIndex:MainView.Tab
 
     var body: some View {
-        VStack {
             // 녹음 및 재생을 수행하는 버튼
-            Button {
-                // 버튼이 눌렸을 때 수행할 작업
-            } label: {
-                Image(systemName: isDetectingContinuousPress ? "mic.slash.circle.fill" : "mic.circle.fill")
+        VStack {
+            HStack {
+                Text(socket.nowSessionName ?? "세션 없음").padding(10)
+            }
+            Spacer()
+            if socket.nowSessionID == nil {
+                Image(systemName: "mic.slash.circle.fill")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: min(UIScreen.main.bounds.width / 2, UIScreen.main.bounds.height / 2))
-            }.simultaneousGesture(continuousPress)
-
-            // 서버에서 받은 오디오 파일을 재생하는 버튼
-//            Button {
-//                playtoServer()
-//            } label: {
-//                Image(systemName: "play.fill")
-//            }
-            
-            Text("\(viewModel.num)")
-            Button {
-                viewModel.onLiveActivity()
-            } label: {
-                Text("라이브액티비티 on")
+                    .foregroundColor(.gray)
+            } else {
+                Button {} label: {
+                    Image(systemName: isDetectingContinuousPress ? "mic.slash.circle.fill" : "mic.circle.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: min(UIScreen.main.bounds.width / 2, UIScreen.main.bounds.height / 2))
+                }.simultaneousGesture(continuousPress)
             }
-            Button {
-                viewModel.offLiveActivity()
-            } label: {
-                Text("라이브액티비티 off")
-            }
+            Spacer()
         }
         .onAppear {
             // AudioManager 초기화 및 오디오 세션 설정
@@ -64,32 +58,26 @@ struct RecordingView: View {
                 if case .second(true, nil) = value {
                     // 두 번째 단계: 연속된 프레스의 두 번째 단계
                     state = true
-                    var audioFileURL: URL?
-                    audioFileURL = FileManager.fileURLInDocumentDirectory(fileName: "audioRecording.m4a")
-                    
-                    // 추가: audioFileURL이 nil이 아닐 때만 녹음 시작
-                   if let audioURL = audioFileURL {
-                       print("Record : ", audioURL)
-                       AudioManager.shared.startRecording(to: audioURL)
-                   } else {
-                       print("Error: audioFileURL is nil.")
-                   }
+                    AudioManager.shared.startRecording()
                 }
             }.onEnded { value in
                 if case .second(_, _) = value {
-                    var audioFileURL: URL?
-                    audioFileURL = FileManager.fileURLInDocumentDirectory(fileName: "audioRecording.m4a")
-                    // 연속된 프레스의 끝
-                    if let url = audioFileURL {
-                        print("play : ", url)
-                        AudioManager.shared.stopRecording()
-                        // AudioManager.shared.startPlayback(from: url)
-                        socket.sendAudioFile(fileURL: url)
-                    } else {
-                        print("audioFileURL is nil")
-                    }
+                    self.end()
                 }
             }
+    }
+    
+    func end() {
+        var audioFileURL: URL?
+        audioFileURL = FileManager.fileURLInDocumentDirectory(fileName: "audioRecording.m4a")
+        // 연속된 프레스의 끝
+        if let url = audioFileURL {
+            print("play : ", url)
+            AudioManager.shared.stopRecording()
+            socket.sendAudioFile(fileURL: url)
+        } else {
+            print("audioFileURL is nil")
+        }
     }
 
     // 서버에서 받은 오디오를 재생하는 함수
@@ -104,10 +92,10 @@ struct RecordingView: View {
     }
 }
 
-#Preview {
-    if #available(iOS 16.1, *) {
-        RecordingView()
-    } else {
-        Text("Not Support iOS version")
-    }
-}
+//#Preview {
+//    if #available(iOS 16.1, *) {
+////        RecordingView()
+//    } else {
+//        Text("Not Support iOS version")
+//    }
+//}

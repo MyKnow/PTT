@@ -27,12 +27,12 @@ struct DynamicIslandWidgetLiveActivity: Widget {
             // 잠금 화면에 뜨는 알림창
             VStack(alignment: .leading) {
                 Text("잠금화면에 뜨는 Live Activity")
-                Text("이름: \(context.attributes.name)")
-                Text("진행률 \(context.state.value)")
+                Text("세션 이름: \(context.attributes.name)")
+                Text(" \(context.state.value)")
             }
             .padding(.leading)
-            .activityBackgroundTint(Color.brown)
-            .activitySystemActionForegroundColor(Color.orange)
+            .activityBackgroundTint(Color.black)
+            .activitySystemActionForegroundColor(Color.white)
             
         } dynamicIsland: { context in
             // DynamicIsland

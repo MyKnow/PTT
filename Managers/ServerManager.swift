@@ -8,10 +8,13 @@
 import Foundation
 
 class ServerManager {
+//    var server = "https://port-0-woju-nodejs-9zxht12blqmfgnv0.sel4.cloudtype.app"
+    var server = "https://192.168.1.214"
+    
     // 파일을 서버에 업로드하는 함수
-    static func uploadFile(fileURL: URL, completion: @escaping (Error?) -> Void) {
+    func uploadFile(fileURL: URL, completion: @escaping (Error?) -> Void) {
         // 서버 업로드 URL
-        let serverURL = URL(string: "https://port-0-woju-nodejs-9zxht12blqmfgnv0.sel4.cloudtype.app/upload")!
+        let serverURL = URL(string: server + "/upload")!
         
         // 업로드할 파일의 로컬 URL
         let fileURL = fileURL
@@ -50,7 +53,7 @@ class ServerManager {
     }
 
     // 서버에서 파일을 다운로드하는 함수
-    static func downloadFile(filename: String, completion: @escaping (URL?, Error?) -> Void) {
+    func downloadFile(filename: String, completion: @escaping (URL?, Error?) -> Void) {
         // 서버 다운로드 URL
         let serverURL = URL(string: "https://port-0-woju-nodejs-9zxht12blqmfgnv0.sel4.cloudtype.app/download/\(filename)")!
 
@@ -79,5 +82,25 @@ class ServerManager {
                 }
             }
         }.resume()
+    }
+    
+    func createSession(_ session: SessionInfo) {
+        // 서버 다운로드 URL
+        let serverURL = URL(string: server+"/session")!
+        
+        var request = URLRequest(url: serverURL)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            // SessionInfo를 JSON으로 인코딩
+            let jsonData = try JSONEncoder().encode(session)
+            if let jsonStr = String(data:jsonData, encoding:.utf8) {
+                print(jsonStr)
+            }
+        } catch {
+            print(error)
+        }
+        
     }
 }

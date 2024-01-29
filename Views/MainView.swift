@@ -9,7 +9,8 @@ import Foundation
 import SwiftUI
 
 struct MainView: View {
-    @State private var selectedTab: Tab = .join
+    @AppStorage("isFirstLaunch") var isFirstLaunch: Bool = false
+    @State var selectedTab: Tab = .join
 
     enum Tab {
         case join, recording, setting
@@ -17,23 +18,32 @@ struct MainView: View {
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            JoinView().tabItem {
+            JoinView(goIndex:$selectedTab).tabItem {
                 Image(systemName: "person.2.wave.2.fill")
                     .modifier(TabItemModifier(selectedTab: .join))
             }
             .tag(Tab.join)
+            .onAppear() {
+                HapticManager.shared.vibrate()
+            }
 
-            RecordingView().tabItem {
+            RecordingView(goIndex:$selectedTab).tabItem {
                 Image(systemName: "mic")
                     .modifier(TabItemModifier(selectedTab: .recording))
             }
             .tag(Tab.recording)
+            .onAppear() {
+                HapticManager.shared.vibrate()
+            }
 
-            SettingView().tabItem {
+            SettingView(name: "ERROR", goIndex:$selectedTab).tabItem {
                 Image(systemName: "gear")
                     .modifier(TabItemModifier(selectedTab: .setting))
             }
             .tag(Tab.setting)
+            .onAppear() {
+                HapticManager.shared.vibrate()
+            }
         }
         .onAppear() {
             UITabBar.appearance().barTintColor = .black

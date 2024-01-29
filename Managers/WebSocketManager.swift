@@ -7,24 +7,83 @@
 
 import Foundation
 import SocketIO
+import ActivityKit
 
-class WebSocketManager: NSObject {
+class WebSocketManager: NSObject, ObservableObject {
     static let shared = WebSocketManager()
-
+    
     let manager: SocketManager
-    let socket: SocketIOClient
-
+    var socket: SocketIOClient
+    @Published var nowSessionID: String?
+    @Published var nowSessionName: String?
+    @Published var myName: String?
+    
     private override init() {
-        self.manager = SocketManager(socketURL: URL(string: "https://port-0-woju-nodejs-9zxht12blqmfgnv0.sel4.cloudtype.app/:3000")!, config: [.log(true), .compress])
+        //        self.manager = SocketManager(socketURL: URL(string: "https://port-0-woju-nodejs-9zxht12blqmfgnv0.sel4.cloudtype.app/:3000")!, config: [.log(true), .compress])
+                self.manager = SocketManager(socketURL: URL(string: "http://192.168.1.214:3000")!, config: [.log(true), .compress])
+//        self.manager = SocketManager(socketURL: URL(string: "http://127.0.0.1:3000")!, config: [.log(true), .compress])
         self.socket = self.manager.defaultSocket
-
+        
         super.init()
-
+        
         // Socket.IO 서버에 연결
         self.addHandlers()
-
+        
         // 연결
         self.socket.connect()
+        
+        login()
+    }
+    
+    func login() {
+        let userName = FileManager.loadDataFromDocumentDirectory("myName.text", as: String.self) ?? "ERROR"
+        print(userName)
+        
+        self.socket.emit("login", userName)
+    }
+    
+    // 외부에서 채널 ID를 설정하는 함수
+    func setSession(_ sessionID: String, _ sessionName: String) async -> String {
+        // continuation을 클로저 외부에서 선언
+        var continuation: CheckedContinuation<String, Never>?
+        
+        leaveNowSession()
+        
+        // withCheckedContinuation 내부에서 continuation에 값을 할당
+        return await withCheckedContinuation { cont in
+            continuation = cont
+            self.socket.emit("join", sessionID)
+            
+            // join-success 이벤트 처리
+            self.socket.once("join-success") { data, _ in
+                print("JOIN!!!!!!!")
+                self.nowSessionID = sessionID
+                self.nowSessionName = sessionName
+                // join 요청을 서버에 보냄
+                continuation?.resume(returning: "JOIN")
+                continuation = nil
+            }
+            
+            // room-full 이벤트 처리
+            self.socket.once("room-full") { data, _ in
+                print("Failed!!!!!!!")
+                // join 실패 시 여기에 처리 로직을 추가할 수 있습니다.
+                continuation?.resume(returning: "FAIL")
+                continuation = nil
+            }
+        }
+    }
+    
+    func leaveNowSession() {
+        self.leaveSession(self.nowSessionID)
+        self.nowSessionID = nil
+        self.nowSessionName = nil
+    }
+    
+    func leaveSession(_ sessionID: String?) {
+        if sessionID != nil {
+            self.socket.emit("leave", sessionID ?? "MAIN")
+        }
     }
 
     func addHandlers() {
@@ -61,10 +120,17 @@ class WebSocketManager: NSObject {
         }
     }
 
+
     func sendData(data: Data) {
-        // 클라이언트에서 음성 파일을 서버로 전송
-        self.socket.emit("send-audio", data)
+        self.myName = FileManager.loadDataFromDocumentDirectory("myName.txt", as: String.self) ?? "ANONYMOUS"
+        // Data를 JSON 형식으로 변환
+        let json = ["audio" : data, "roomName" : self.nowSessionID ?? "MAIN", "myName" : self.myName ?? "ANONYMOUS"] as [String : Any]
+        
+        // 서버로 JSON 데이터 전송
+        self.socket.emit("send-audio", json)
     }
+
+
 
     // 새로운 함수 추가: 클라이언트에서 파일을 전송하는 코드
     func sendAudioFile(fileURL: URL) {

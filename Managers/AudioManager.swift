@@ -10,14 +10,17 @@ import MediaPlayer
 
 class AudioManager {
     static let shared = AudioManager()
-    private let volumeView: MPVolumeView
+    var socket = WebSocketManager.shared
+    private var volumeView = MPVolumeView()
     private var audioRecorder: AVAudioRecorder?
     private var audioPlayer: AVAudioPlayer?
     private var audioFileURL: URL?
     
     private init() {
         // MPVolumeView 초기화
-        self.volumeView = MPVolumeView()
+        DispatchQueue.main.async {
+            self.volumeView = MPVolumeView()
+        }
     }
     
     // 최대 볼륨 설정
@@ -83,26 +86,36 @@ class AudioManager {
     }
 
     // 녹음 시작
-    func startRecording(to url: URL) {
+    func startRecording() {
         configureAudioSession(isRecording: true)
+        if let audioFileURL = FileManager.fileURLInDocumentDirectory(fileName: "audioRecording.m4a") {
+            do {
+                let settings: [String: Any] = [
+                    AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+                    AVSampleRateKey: 44100.0,
+                    AVNumberOfChannelsKey: 2,
+                    AVEncoderAudioQualityKey: AVAudioQuality.max.rawValue
+                ]
 
-        do {
-            let settings: [String: Any] = [
-                AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-                AVSampleRateKey: 44100.0,
-                AVNumberOfChannelsKey: 2,
-                AVEncoderAudioQualityKey: AVAudioQuality.max.rawValue
-            ]
-
-            audioRecorder = try AVAudioRecorder(url: url, settings: settings)
-            audioRecorder?.record()
-        } catch {
-            print("오디오 녹음 설정 오류: \(error.localizedDescription)")
+                audioRecorder = try AVAudioRecorder(url: audioFileURL, settings: settings)
+                audioRecorder?.record()
+            } catch {
+                print("오디오 녹음 설정 오류: \(error.localizedDescription)")
+            }
+        } else {
+            print("녹음 불가")
         }
+
     }
     
     func stopRecording() {
         audioRecorder?.stop()
+        
+        if let audioFileURL = FileManager.fileURLInDocumentDirectory(fileName: "audioRecording.m4a") {
+            socket.sendAudioFile(fileURL: audioFileURL)
+        } else {
+            print("오디오 파일이 없습니다.")
+        }
     }
 
     // 재생 시작
