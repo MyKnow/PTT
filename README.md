@@ -1,2 +1,2 @@
-# woju
-커플 앱
+# PTT
+Push To Talk in iOS
